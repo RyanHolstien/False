@@ -3,7 +3,9 @@ import scala.collection.mutable.HashMap
 
 object False {
 	def main(args: Array[String]) {
-		False START "[$1=$[\\%1\\]?~[$1-f;!*]?]f:6f;!";
+		False START "0i:1a:1b:[i;16=~][a;$.\", \"$b;$a:+b:i;1+i:]#\"...\"";
+		//False START "1a:[a;5\\>][a;1+a:]#a;."
+		//False START "[$1=$[\\%1\\]?~[$1-f;!*]?]f:9f;!.";
 
 	}
 
@@ -143,16 +145,18 @@ object False {
 				case '#' => {
 					val func = stack.pop;
 					val cond = stack.pop;
-					val loop = cond+"["+func+"]?["+cond+"]["+func+"]#";
-					muProg = addToProg(i, muProg, func);
+					val loop = cond+"["+func+"["+cond+"]["+func+"]#]?";
+					muProg = addToProg(i, muProg, loop);
 					prog = muProg.toCharArray;
 				}
 				case _ => false
 			}
 			i = i+1;
 		}
+		println();
 		println(stack.toString+" "+stack.length);
 		println(map.toString);
+		
 	}
 
 	def addToProg(i:Int, prog:String, func:String):String = {
@@ -197,11 +201,19 @@ object False {
 
 	def getFunc(start:Int): String = {
 		var ret = new String;
+		var bracket = new Stack[Char];
+		bracket.push('[');
 		for(i:Int <- start until prog.length) {
-			if(prog(i) != ']') {
+			if(prog(i) == '[') {
+				bracket.push('[');
+				ret = ret + prog(i);
+			} else if(prog(i) == ']' && bracket.length == 1 && bracket.top == '[') {
+				return ret;
+			} else if(prog(i) == ']') {
+				bracket.pop;
 				ret = ret + prog(i);
 			} else {
-				return ret;
+				ret = ret + prog(i);
 			}
 		}
 		ret
