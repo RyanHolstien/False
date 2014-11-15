@@ -3,7 +3,9 @@ import scala.collection.mutable.HashMap
 
 object False {
 	def main(args: Array[String]) {
-		False START "ß[^$1_=~][,]#";
+		//False START "0 2 5 4 8 7 2 ø.";
+		False START "1 6 9 5 8 7 49 7s:1i:[s;0>][1i:[s;i;>][$i;1+ø\\>~[i;`]?i;1+i:]#.\" \"s;1-s:]#"
+		//False START "ß[^$1_=~][,]#";
 		//False START "[][^$1_=~][[.!]]#%!";
 		//False START "[\\$@$@\\/*-0=]d:  {Test if p divides q}[$2/[\\$@$@\\d;!~][1-]#1=\\%]p:   {Is p prime?}[[$1=~][$p;![$.\" \"]?1-]#]f:  {for all i from n to 2 do { if i is prime then print i} }99f;!";
 		//False START "[\"'[,34,$!34,'],!\"]'[,34,$!34,'],!";
@@ -98,9 +100,23 @@ object False {
 					stack.push(third);
 				}
 				case 'ø' => {
+					stack.pop;
 					val n = stack.pop;
 					val ar:Array[String] = stack.toArray;
 					stack.push(ar(n.toInt));
+				} 
+				//Extension of ø rotates the nth element to the top instead of copies it
+				case '`' => {
+					var tempL:Stack[String]  = new Stack[String];
+					val n = stack.pop.toInt;
+					for(i:Int <- 0 until n) {
+						tempL.push(stack.pop);
+					}
+					val res = stack.pop;
+					for(i:Int <- 0 until tempL.length) {
+						stack.push(tempL.pop);
+					}
+					stack.push(res);
 				}
 				case ''' => {
 					val char = prog(i+1);
@@ -118,14 +134,19 @@ object False {
 					stack.push(map.get(key).getOrElse("ERROR"));
 				}
 				//IO
-				case '.' => print(stack.pop);
+				case '.' => {
+					try {
+						print(stack.pop);
+					} catch {
+						case e:Exception => println("stack empty");
+					}
+				}
 				case ',' => {
 					val isANum = stack.pop;
 					try {
 						val char = isANum.toInt
 						print(char.toChar)
-					}
-					catch {
+					} catch {
 						case e:Exception => print(isANum);
 					}
 				}
