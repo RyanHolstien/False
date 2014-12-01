@@ -3,16 +3,26 @@ import scala.collection.mutable.HashMap
 
 object False {
 	def main(args: Array[String]) {
-		//False START "0 2 5 4 8 7 2 ø.";
-		False START "1 6 9 5 8 7 49 7s:1i:[s;0>][1i:[s;i;>][$i;1+ø\\>~[i;`]?i;1+i:]#.\" \"s;1-s:]#"
+		println("Sort");
+		False START "6 9 5 8 7 49 1 7s:1i:[s;0>][1i:[s;i;>][$i;1+ø\\>~[i;`]?i;1+i:]#.\" \"s;1-s:]#" 
+		
+		println("Prime number from 1 to 100");
+		False START "[\\$@$@\\/*-0=]d:  {Test if p divides q}[$2/[\\$@$@\\d;!~][1-]#1=\\%]p:   {Is p prime?}[[$1=~][$p;![$.\" \"]?1-]#]f:  {for all i from n to 2 do { if i is prime then print i} }99f;!";
+		
+		println("16 Fibonacci");
+		False START "0i:1a:1b:[i;16=~][a;$.\", \"$b;$a:+b:i;1+i:]#\"...\""; 
+		
+		println("Quine");
+		False START "[\"'[,34,$!34,'],!\"]'[,34,$!34,'],!";  
+		
+		println("9!");
+		False START "[$1=$[\\%1\\]?~[$1-f;!*]?]f:9f;!."; 
+		
+		println("reverse input list");
+		False START "[][^$1_=~][[.!]]#%!"; 
+		
 		//False START "ß[^$1_=~][,]#";
-		//False START "[][^$1_=~][[.!]]#%!";
-		//False START "[\\$@$@\\/*-0=]d:  {Test if p divides q}[$2/[\\$@$@\\d;!~][1-]#1=\\%]p:   {Is p prime?}[[$1=~][$p;![$.\" \"]?1-]#]f:  {for all i from n to 2 do { if i is prime then print i} }99f;!";
-		//False START "[\"'[,34,$!34,'],!\"]'[,34,$!34,'],!";
-		//False START "0i:1a:1b:[i;16=~][a;$.\", \"$b;$a:+b:i;1+i:]#\"...\"";
-		//False START "1a:[a;5\\>][a;1+a:]#a;."
-		//False START "[$1=$[\\%1\\]?~{asdasdasda}[$1-f;!{tgws resresgfsd}*]?]f:9f;!.";
-
+		//False START "1a:[a;5\\>][a;1+a:]#a;
 	}
 
 	//The main prog
@@ -202,8 +212,8 @@ object False {
 		
 		}
 		println();
-		println(stack.toString+" "+stack.length);
-		println(map.toString);
+		//println(stack.toString+" "+stack.length);
+		//println(map.toString);
 		
 	}
 
